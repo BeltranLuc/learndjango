@@ -1,0 +1,19 @@
+{% extends "_base.html" %}
+
+{% block title %}
+    <title>Editer l'article</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Editer l'article</h1>
+    <form method="post">
+        {% csrf_token %} 
+        {{ form.as_p }}
+        <input type="submit" value="Editer">
+    </form>
+
+    <form method="post" action="{% url 'posts:delete' form.instance.slug %}" style="display:inline;">
+        {% csrf_token %}
+        <button class="neg" type="submit" style="width:100%;">Supprimer</button>
+    </form>
+{% endblock %}

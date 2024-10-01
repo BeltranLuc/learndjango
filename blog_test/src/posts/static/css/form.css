@@ -1,0 +1,43 @@
+form input, form textarea {
+    display: block;
+    padding: .75rem;
+    line-height: 1.5;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    width: 100%; /* Pleine largeur */
+    max-width: 600px; /* Limite de largeur */
+}
+
+form label {
+    display: inline-block;
+    box-sizing: border-box;
+    margin: 1rem 0;
+}
+
+form input[type="submit"] {
+    background-color: var(--color-button-bg);
+    color: var(--color-white);
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form input[type="submit"]:hover {
+    background-color: var(--color-button-bg-hover); /* Couleur au survol */
+}
+
+form input, form textarea {
+    margin-bottom: 1rem; /* Espacement entre les champs */
+    width: 100%; /* Pleine largeur */
+}
+
+form input:focus, form textarea:focus {
+    border-color: var(--color-title); /* Couleur de bordure au focus */
+    outline: none; /* Supprime le contour par défaut */
+}
+

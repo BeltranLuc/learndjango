@@ -1,0 +1,40 @@
+{% extends "_base.html" %}
+
+{% block title %}
+    <title>Accueil</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Mon blog</h1>
+
+    {% for post in posts %}
+        <article>
+            <div class="post-title">
+                <h2>{{ post.title }}</h2>
+                {% if request.user.is_authenticated %}
+                    <div class="button-container">
+                        <form action="{% url 'posts:edit' post.slug %}" method="get">
+                            <button type="submit">Editer</button>
+                        </form>
+                        <form method="post" action="{% url 'posts:toggle_publish' post.slug %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" 
+                                    class="{% if post.published %}neg{% else %}pos{% endif %}">
+                                {% if post.published %}Dépublier{% else %}Publier{% endif %}
+                            </button>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div>                
+                <h5 class="post-subtitle">Publié le {{ post.created_on|date:'j F Y' }} - mis à jour le {{ post.last_updated }}</h5>
+                <p class="post-extrait">{{ post.content|truncatewords:50 }}</p>
+
+                <form method="get" action="{% url 'posts:post' post.slug %}">
+                    <button type="submit">Lire la suite</button>
+                </form>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock %}

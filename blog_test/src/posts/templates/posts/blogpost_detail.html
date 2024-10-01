@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+
+{% block title %}
+    <title>{{ post.title }}</title>
+{% endblock %}
+
+{% block content %}
+    <article class="post-detail">
+        <div class="post-title">
+            <h2>{{ post.title }}</h2>
+            {% if request.user.is_authenticated %}
+            <div class="button-container">
+                <form action="{% url 'posts:edit' post.slug %}" method="get">
+                    <button type="submit">Editer</button>
+                </form>
+                <form method="post" action="{% url 'posts:toggle_publish' post.slug %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" 
+                            class="{% if post.published %}neg{% else %}pos{% endif %}">
+                        {% if post.published %}Dépublier{% else %}Publier{% endif %}
+                    </button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+
+        <div>{{ post.content|linebreaks|safe }}</div>
+    </article>
+{% endblock %}
